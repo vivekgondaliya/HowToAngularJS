@@ -12,8 +12,16 @@ function($scope){
   ];
 
   $scope.addPost = function(){
+
+  	//prevent user from posting blank title
+  	if(!$scope.title || $scope.title === '') {alert("Please enter Post title.");return;}
+
   	$scope.posts.push({title:$scope.title, upvotes:0});
   	$scope.title = '';
+  };
+
+  $scope.incrementUpvotes = function(post){
+  	post.upvotes += 1; 
   };
 
 }]);
