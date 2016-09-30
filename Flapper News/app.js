@@ -1,15 +1,9 @@
 var app = angular.module('flapperNews', []);
 
 app.controller('MainCtrl', [
-'$scope',
-function($scope){
-  $scope.posts = [
-  	{title:'Post 1', upvotes: 5},
-  	{title:'Post 2', upvotes: 9},
-  	{title:'Post 3', upvotes: 2},
-  	{title:'Post 4', upvotes: 7},
-  	{title:'Post 5', upvotes: 3}
-  ];
+'$scope', 'posts',
+function($scope, posts){
+  $scope.posts = posts.posts;
 
   $scope.addPost = function(){
 
@@ -29,4 +23,17 @@ function($scope){
   	post.upvotes += 1; 
   };
 
+}]);
+
+//lower camelCase for factory naming convention
+app.factory('posts', [function(){
+	
+	//note that we could have simply exported the posts array directly, 
+	//however, by exporting an object that contains the posts array,
+	//we can add new objects and methods to our services in the future.
+	var o ={
+		posts :[]
+	};
+
+	return o;
 }]);
