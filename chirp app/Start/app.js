@@ -8,7 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var api = require('./routes/api');
-//var authenticate = require('./routes/authenticate');
+var authenticate = require('./routes/authenticate')(passport);
 
 var app = express();
 
@@ -28,9 +28,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
+//initailzing passport
+var initPassport = require('./passport-init');
+initPassport(passport);
+
 //routers we are going to use
 app.use('/api', api);
-//app.use('/auth', authenticate);
+app.use('/auth', authenticate);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
