@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Filters</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="app.js"></script>
+  <style type="text/css">body{font-family: sans-serif;}</style>
+</head>
+<body >
+  <div ng-app="filtration" ng-controller="FilterController">
+    	<ol>
+    		<li><code>currency - </code> {{123 | currency}} <!-- Output: $123.00--></li>
+    		<li><code>date: 'medium' - </code> {{today | date: 'medium'}} <!-- Oct 12, 2016 10:38:54 PM, There are 8 kinds of date filters. Year to Second Formatting also available--></li>
+    		<li><code>filter : 'e' - </code> {{ ['Ari', 'Lerner', 'Likes', 'To', 'Eat', 'Pizza'] | filter:'e' }} <!-- ["Lerner","Likes","Eat"] --></li>
+    		<li><code>filter :{json property} - </code> {{ [
+	    				{
+	    					'name': 'Vivek',
+	    					'City': 'Washington DC',
+	    					'favorite food': 'Pizza'
+	    				}, 
+	    				{
+	    					'name': 'Maulik',
+	    					'City': 'Salem',
+	    					'favorite food': 'Indian food'
+	    				}
+    				] | filter:{'favorite food': 'Pizza'} 
+    			}}
+				<!-- [{"name":"Vivek","City":"Washington DC","favorite food":"Pizza"}] We can also use filter based on function we define --></li>
+				<li><code>json - </code> {{ {'name': 'Ari', 'City': 'San Francisco'} | json }} <!--JSON into String--></li>
+				<li><code>limitTo -</code> {{ 'Its very cloudy today' | limitTo:3 }} <!--Output: Its. YOu can also use negative number--></li>
+				<li><code>lowercase - </code>{{ "This will be LOWERCASE " | lowercase }}</li>
+				<li><code>number: 2 - </code> {{ 1.234567 | number:2 }}</li>
+				<li><code>orderBy - </code> {{ [	
+						{
+					    'name': 'Ari',
+					    'status': 'awake'
+					    }, {
+					    'name': 'Q',
+					    'status': 'sleeping'
+					    }, {
+					    'name': 'Nate',
+					    'status': 'awake'
+					    }
+					   ] | orderBy: 'name':true
+					}}
+				</li>
+				<li><code>Custom Filter: Capitalize first character of the string - </code>{{ 'vivek is killing in fantasy football.' | lowercase | capitalize }}
+</li>
+    	</ol>
+
+  </div>
+</body>
+</html>
